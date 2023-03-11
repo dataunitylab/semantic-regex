@@ -1,0 +1,8 @@
+*.bz2
+*.db
+*.gz
+*.joblib
+*.txt
+.mypy_cache/
+pages/
+patterns.json
