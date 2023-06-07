@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: Mior
+  given-names: Michael
+  orcid: "https://orcid.org/0000-0002-4057-8726"
+  email: mmior@mail.rit.edu
+  affiliation: Rochester Institute of Technology
+title: "Learning from Uncurated Regular Expressions"
+url: "https://github.com/dataunitylab/semantic-regex"
+license: MIT
+preferred-citation:
+  type: conference-paper
+  authors:
+    - family-names: Mior
+      given-names: Michael
+      orcid: "https://orcid.org/0000-0002-4057-8726"
+      email: mmior@mail.rit.edu
+      affiliation: Rochester Institute of Technology
+  doi: 10.1145/3596225.3596226
+  conference:
+    name: "1st Workshop on Simplicity in Management of Data"
+    city: Bellevue
+    region: WA
+    country: US
+    date-start: 2023-06-23
+    date-end: 2023-06-23
+  start: 1 # First page number
+  end: 5 # Last page number
+  title: "Learning from Uncurated Regular Expressions"
+  year: 2023
+  month: 6
