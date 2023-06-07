@@ -26,6 +26,9 @@ sys.stderr.write("Loading regexes from file…\n")
 with open("hs.db", "rb") as f:
     [num_patterns, bdb] = pickle.load(f)
     db = hyperscan.loadb(bdb)
+    # Scratch is not correctly initialized for deserialized databses
+    # see https://github.com/darvid/python-hyperscan/issues/50
+    db.scratch = hyperscan.Scratch(db)
 
 # Define a match callback for Hyperscan which updates the feature matrix
 def on_match(match_id, from_idx, to_idx, flags, context):
