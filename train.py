@@ -31,19 +31,6 @@ num_examples = len(labels)
 # Encode the labels as integers
 le = LabelEncoder().fit(labels.values.ravel())
 labels = le.transform(labels.values.ravel())
-pq_val_labels = ParquetFile(
-    "../sherlock-project/data/data/raw/validation_labels.parquet"
-)
-val_labels = pd.DataFrame(
-    {
-        "type": pd.Categorical(
-            pq_val_labels.read(columns=["type"]).columns[0].to_numpy().ravel()
-        )
-    }
-)
-val_labels = tf.keras.utils.to_categorical(
-    le.transform(val_labels.values.ravel())[:5000]
-)
 np.save("classes.npy", le.classes_)
 
 # Load one row just to get the shape of the input
