@@ -20,8 +20,8 @@ le.classes_ = np.load("classes.npy", allow_pickle=True)
 # labels = le.transform(labels.values.ravel())
 num_examples = len(labels)
 
-model = model_from_json(open("nn_model.json", "r").read())
-model.load_weights("nn_model_weights.h5")
+model = model_from_json(open("nn_model_sherlock.json", "r").read())
+model.load_weights("nn_model_weights_sherlock.h5")
 
 sys.stderr.write("Evaluating...\n")
 labels_pred = [""] * len(labels)
