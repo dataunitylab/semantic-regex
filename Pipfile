@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 numpy = "*"
-hyperscan = "0.3.3"
+hyperscan = "*"
 pyarrow = "*"
 scipy = "*"
 joblib = "*"
@@ -17,4 +17,4 @@ tensorflow = "*"
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.11"

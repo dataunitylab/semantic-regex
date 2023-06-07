@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a82e2d11979a159f7337d68024152c9335eb48344f766336a6794bf690954542"
+            "sha256": "42762827dbd1187e8bb4b3cc6faef93a5cb37fe3a849d6c84e2355d573fad5b1"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.9"
+            "python_version": "3.11"
         },
         "sources": [
             {
@@ -125,7 +125,7 @@
                 "sha256:f8303414c7b03f794347ad062c0516cee0e15f7a612abd0ce1e25caf6ceb47df",
                 "sha256:fca62a8301b605b954ad2e9c3666f9d97f63872aa4efcae5492baca2056b74ab"
             ],
-            "markers": "python_version >= '3.7'",
+            "markers": "python_full_version >= '3.7.0'",
             "version": "==3.1.0"
         },
         "flatbuffers": {
@@ -582,7 +582,7 @@
                 "sha256:90260d9058e514786967344d0ef75fa8727eed8a7d2e43ce9f4bcf1b536174f7",
                 "sha256:e38464a49c6c85d7f1351b0126661487a7e0a14a50f1675ec50eb34d4f20ef21"
             ],
-            "markers": "python_version >= '3.6' and python_version < '4.0'",
+            "markers": "python_version >= '3.6' and python_version < '4'",
             "version": "==4.9"
         },
         "scikit-learn": {
@@ -638,6 +638,14 @@
             ],
             "index": "pypi",
             "version": "==1.10.1"
+        },
+        "setuptools": {
+            "hashes": [
+                "sha256:5df61bf30bb10c6f756eb19e7c9f3b473051f48db77fddbe06ff2ca307df9a6f",
+                "sha256:62642358adc77ffa87233bc4d2354c4b2682d214048f500964dbe760ccedf102"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==67.8.0"
         },
         "six": {
             "hashes": [
