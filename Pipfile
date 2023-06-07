@@ -10,6 +10,9 @@ pyarrow = "*"
 scipy = "*"
 joblib = "*"
 tqdm = "*"
+pandas = "*"
+scikit-learn = "*"
+tensorflow = "*"
 
 [dev-packages]
 
