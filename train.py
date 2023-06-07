@@ -91,7 +91,7 @@ model.compile(
     loss="categorical_crossentropy",
     metrics=["categorical_accuracy"],
 )
-open("nn_model_webtable.json", "w").write(model.to_json())
+open("nn_model_sherlock.json", "w").write(model.to_json())
 
 preprocessed = open("preprocessed.txt", "r")
 i = 0
@@ -118,4 +118,4 @@ with tqdm(total=len(labels)) as pbar:
         pbar.update(len(matrix))
 
 # Save the trained model weights
-model.save_weights("nn_model_weights_webtables.h5")
+model.save_weights("nn_model_weights_sherlock.h5")
