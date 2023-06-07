@@ -6,3 +6,4 @@
 .mypy_cache/
 pages/
 patterns.json
+*.npy
