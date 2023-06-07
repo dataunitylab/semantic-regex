@@ -14,7 +14,7 @@ Note that the dataset from the [Sherlock](https://github.com/mitmedialab/sherloc
 
 3. Preprocess the data to generate feature vectors
 
-`pipenv run python preprocess.py`
+`pipenv run python preprocess.py train`
 
 4. Train the model on the extracted features
 

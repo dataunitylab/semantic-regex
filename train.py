@@ -34,7 +34,7 @@ labels = le.transform(labels.values.ravel())
 np.save("classes.npy", le.classes_)
 
 # Load one row just to get the shape of the input
-preprocessed = open("preprocessed.txt", "r")
+preprocessed = open("preprocessed_train.txt", "r")
 matrix = np.loadtxt(preprocessed, max_rows=1)
 regex_shape = matrix.shape[0]
 
@@ -80,7 +80,7 @@ model.compile(
 )
 open("nn_model_sherlock.json", "w").write(model.to_json())
 
-preprocessed = open("preprocessed.txt", "r")
+preprocessed = open("preprocessed_train.txt", "r")
 i = 0
 with tqdm(total=len(labels)) as pbar:
     while True:

@@ -1,3 +1,4 @@
+import argparse
 import ast
 import itertools
 import math
@@ -19,7 +20,12 @@ import scipy.sparse
 
 BATCH_SIZE = 1000
 MAX_VALS = 1000
-OUTPUT_FILENAME = "preprocessed.txt"
+
+parser = argparse.ArgumentParser()
+parser.add_argument("dataset", choices=["train", "test"])
+args = parser.parse_args()
+
+output_file = f"preprocessed_{args.dataset}.txt"
 
 # Load the precompiled regular expression database
 sys.stderr.write("Loading regexes from file…\n")
@@ -40,11 +46,11 @@ def on_match(match_id, from_idx, to_idx, flags, context):
 pq_values = ParquetFile("../sherlock-project/data/data/raw/train_values.parquet")
 
 # Remove the output if it exists
-if os.path.exists(OUTPUT_FILENAME):
-    os.remove(OUTPUT_FILENAME)
+if os.path.exists(output_file):
+    os.remove(output_file)
 
 # Process batches in the input
-with open(OUTPUT_FILENAME, "a") as f:
+with open(output_file, "a") as f:
     batch = 0
     total_batches = math.ceil(pq_values.metadata.num_rows / BATCH_SIZE)
     for value_batch in tqdm(
