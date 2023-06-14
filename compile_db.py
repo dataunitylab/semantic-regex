@@ -20,18 +20,19 @@ for line in sys.stdin:
     except hyperscan.error as e:
         pass
 
+# Build input for the final Hyperscan database
 db = hyperscan.Database()
-num_patterns = 0
 patterns = []
 ids = []
 flags = []
-for regex in regexes:
+for (i, regex) in enumerate(regexes):
+    print(json.dumps(regex))
     patterns.append(regex.encode("utf8"))
-    ids.append(num_patterns)
+    ids.append(i)
     flags.append(hyperscan.HS_FLAG_SINGLEMATCH | hyperscan.HS_FLAG_UTF8)
-    num_patterns += 1
 
+# Compile the final database and save to file
 sys.stderr.write("Compiling %d patterns...\n" % len(patterns))
 db.compile(expressions=patterns, ids=ids, flags=flags)
 with open("hs.db", "wb") as f:
-    pickle.dump([num_patterns, hyperscan.dumpb(db)], f)
+    pickle.dump([len(patterns), hyperscan.dumpb(db)], f)

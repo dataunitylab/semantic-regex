@@ -13,6 +13,8 @@ tqdm = "*"
 pandas = "*"
 scikit-learn = "*"
 tensorflow = "*"
+shap = "*"
+matplotlib = "*"
 
 [dev-packages]
 
