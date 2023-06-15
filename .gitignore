@@ -11,3 +11,4 @@ patterns.json
 *.h5
 *.png
 regex101/
+*.sqlite3

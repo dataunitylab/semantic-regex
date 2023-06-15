@@ -15,6 +15,7 @@ scikit-learn = "*"
 tensorflow = "*"
 shap = "*"
 matplotlib = "*"
+optuna-dashboard = "*"
 
 [dev-packages]
 

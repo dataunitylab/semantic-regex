@@ -5,6 +5,7 @@ import random
 
 import matplotlib.pyplot as plt
 import numpy as np
+import optuna
 from pyarrow.parquet import ParquetFile
 import shap
 import tensorflow as tf
