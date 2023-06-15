@@ -43,7 +43,7 @@ def on_match(match_id, from_idx, to_idx, flags, context):
 
 
 # Load the values
-pq_values = ParquetFile("../sherlock-project/data/data/raw/train_values.parquet")
+pq_values = ParquetFile(f"../sherlock-project/data/data/raw/{args.dataset}_values.parquet")
 
 # Remove the output if it exists
 if os.path.exists(output_file):
