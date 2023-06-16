@@ -4,7 +4,7 @@ import sys
 import numpy as np
 from optuna_dashboard import run_server
 import optuna
-from optuna.storages import RDBStorage
+from optuna.storages import JournalStorage, JournalRedisStorage
 import pandas as pd
 from pyarrow.parquet import ParquetFile
 from sklearn.preprocessing import LabelEncoder
@@ -20,7 +20,7 @@ from tqdm import tqdm
 
 
 BATCH_SIZE = 1000
-VALIDATION_SAMPLES = 10000
+VALIDATION_SAMPLES = 5000
 
 sys.stderr.write("Loading labels...\n")
 pq_labels = ParquetFile("../sherlock-project/data/data/raw/train_labels.parquet")
@@ -57,6 +57,8 @@ regex_shape = matrix.shape[0]
 val_matrix = np.loadtxt("preprocessed_validation.txt", max_rows=VALIDATION_SAMPLES)
 
 def objective(trial):
+    global labels, val_labels, val_matrix, regex_shape
+
     learning_rate = trial.suggest_float("learning_rate", 1e-5, 1e-1, log=True)
     optim_learning_rate = trial.suggest_float("optim_learning_rate", 1e-5, 1e-1, log=True)
     dropout = trial.suggest_float("dropout", 0.0, 0.5)
@@ -133,8 +135,9 @@ def objective(trial):
     return val_loss
 
 
-storage = RDBStorage("sqlite:///db.sqlite3")
-study = optuna.create_study(storage=storage)
+storage = JournalStorage(JournalRedisStorage("redis://129.21.22.217:6379"))
+#storage = RDBStorage("sqlite:///db.sqlite3")
+study = optuna.create_study(study_name='optuna_test', storage=storage, load_if_exists=True)
 study.optimize(objective, n_trials=100)
 
 run_server(storage)

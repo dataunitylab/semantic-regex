@@ -16,6 +16,7 @@ tensorflow = "*"
 shap = "*"
 matplotlib = "*"
 optuna-dashboard = "*"
+redis = "*"
 
 [dev-packages]
 
