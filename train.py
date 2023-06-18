@@ -129,8 +129,12 @@ def objective(trial):
                 validation_data=(val_matrix, tf.keras.utils.to_categorical(val_labels)),
             )
             val_loss = train.history["val_loss"][-1]
+            trial.report(val_loss, step=i)
             i += 1
             pbar.update(len(matrix))
+
+            if trial.should_prune():
+                raise optuna.TrialPruned()
 
     return val_loss
 
