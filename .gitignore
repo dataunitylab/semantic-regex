@@ -10,4 +10,5 @@ patterns.json
 *.json
 *.h5
 *.png
+*.parquet
 regex101/

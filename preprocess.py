@@ -23,13 +23,16 @@ MAX_VALS = 1000
 
 parser = argparse.ArgumentParser()
 parser.add_argument("dataset", choices=["train", "test"])
+parser.add_argument("--database", default="hs.db")
+parser.add_argument("--sherlock-path", default="../sherlock-project/data/data/raw")
+parser.add_argument("--output-dir", default=".")
 args = parser.parse_args()
 
-output_file = f"preprocessed_{args.dataset}.txt"
+output_file = os.path.join(args.output_dir, f"preprocessed_{args.dataset}.txt")
 
 # Load the precompiled regular expression database
 sys.stderr.write("Loading regexes from file…\n")
-with open("hs.db", "rb") as f:
+with open(args.database, "rb") as f:
     [num_patterns, bdb] = pickle.load(f)
     db = hyperscan.loadb(bdb)
     # Scratch is not correctly initialized for deserialized databses
@@ -43,7 +46,7 @@ def on_match(match_id, from_idx, to_idx, flags, context):
 
 
 # Load the values
-pq_values = ParquetFile(f"../sherlock-project/data/data/raw/{args.dataset}_values.parquet")
+pq_values = ParquetFile(os.path.join(args.sherlock_path, f"{args.dataset}_values.parquet"))
 
 # Remove the output if it exists
 if os.path.exists(output_file):

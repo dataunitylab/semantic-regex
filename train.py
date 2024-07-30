@@ -1,3 +1,5 @@
+import argparse
+import os
 import sys
 
 import numpy as np
@@ -17,8 +19,14 @@ from tqdm import tqdm
 
 BATCH_SIZE = 1000
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--sherlock-path", default="../sherlock-project/data/data/raw")
+parser.add_argument("--input-dir", default=".")
+parser.add_argument("--output-dir", default=".")
+args = parser.parse_args()
+
 sys.stderr.write("Loading labels...\n")
-pq_labels = ParquetFile("../sherlock-project/data/data/raw/train_labels.parquet")
+pq_labels = ParquetFile(os.path.join(args.sherlock_path, "train_labels.parquet"))
 labels = pd.DataFrame(
     {
         "type": pd.Categorical(
@@ -31,10 +39,10 @@ num_examples = len(labels)
 # Encode the labels as integers
 le = LabelEncoder().fit(labels.values.ravel())
 labels = le.transform(labels.values.ravel())
-np.save("classes.npy", le.classes_)
+np.save(os.path.join(args.output_dir, "classes.npy"), le.classes_)
 
 # Load one row just to get the shape of the input
-preprocessed = open("preprocessed_train.txt", "r")
+preprocessed = open(os.path.join(args.input_dir, "preprocessed_train.txt"), "r")
 matrix = np.loadtxt(preprocessed, max_rows=1)
 regex_shape = matrix.shape[0]
 
@@ -78,9 +86,9 @@ model.compile(
     loss="categorical_crossentropy",
     metrics=["categorical_accuracy"],
 )
-open("nn_model_sherlock.json", "w").write(model.to_json())
+open(os.path.join(args.output_dir, "nn_model_sherlock.json"), "w").write(model.to_json())
 
-preprocessed = open("preprocessed_train.txt", "r")
+preprocessed = open(os.path.join(args.input_dir, "preprocessed_train.txt"), "r")
 i = 0
 with tqdm(total=len(labels)) as pbar:
     while True:
@@ -105,4 +113,4 @@ with tqdm(total=len(labels)) as pbar:
         pbar.update(len(matrix))
 
 # Save the trained model weights
-model.save_weights("nn_model_weights_sherlock.h5")
+model.save_weights(os.path.join(args.output_dir, "nn_model_weights_sherlock.h5"))

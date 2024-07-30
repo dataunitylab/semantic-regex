@@ -1,3 +1,5 @@
+import argparse
+import os
 import sys
 
 import numpy as np
@@ -10,22 +12,27 @@ from tqdm import tqdm
 
 BATCH_SIZE = 1000
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--sherlock-path", default="../sherlock-project/data/data/raw")
+parser.add_argument("--input-dir", default=".")
+args = parser.parse_args()
+
 sys.stderr.write("Loading labels...\n")
-pq_labels = ParquetFile("../sherlock-project/data/data/raw/test_labels.parquet")
+pq_labels = ParquetFile(os.path.join(args.sherlock_path, "test_labels.parquet"))
 labels = pd.DataFrame(
     {"type": pd.Categorical(pq_labels.read(columns=["type"]).columns[0].to_numpy())}
 )
 le = LabelEncoder()
-le.classes_ = np.load("classes.npy", allow_pickle=True)
+le.classes_ = np.load(os.path.join(args.input_dir, "classes.npy"), allow_pickle=True)
 # labels = le.transform(labels.values.ravel())
 num_examples = len(labels)
 
-model = model_from_json(open("nn_model_sherlock.json", "r").read())
-model.load_weights("nn_model_weights_sherlock.h5")
+model = model_from_json(open(os.path.join(args.input_dir, "nn_model_sherlock.json"), "r").read())
+model.load_weights(os.path.join(args.input_dir, "nn_model_weights_sherlock.h5"))
 
 sys.stderr.write("Evaluating...\n")
 labels_pred = [""] * len(labels)
-preprocessed = open("preprocessed_test.txt", "r")
+preprocessed = open(os.path.join(args.input_dir, "preprocessed_test.txt"), "r")
 batch = 0
 with tqdm(total=len(labels)) as pbar:
     while True:

@@ -1,9 +1,14 @@
+import argparse
 import ast
 import hyperscan
 import json
 import pickle
 import sys
 
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-o", "--output", default="hs.db")
+args = parser.parse_args()
 
 sys.stderr.write("Collecting patterns...\n")
 regexes = set()
@@ -34,5 +39,5 @@ for (i, regex) in enumerate(regexes):
 # Compile the final database and save to file
 sys.stderr.write("Compiling %d patterns...\n" % len(patterns))
 db.compile(expressions=patterns, ids=ids, flags=flags)
-with open("hs.db", "wb") as f:
+with open(args.output, "wb") as f:
     pickle.dump([len(patterns), hyperscan.dumpb(db)], f)

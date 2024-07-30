@@ -1,0 +1,45 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  pre_job:
+    name: Check duplicate
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@12aca0a884f6137d619d6a8a09fcc3406ced5281
+        with:
+          cancel_others: true
+          concurrent_skipping: same_content
+          do_not_skip: '["pull_request", "schedule", "workflow_dispatch"]'
+
+  build:
+    name: Test
+    needs: pre_job
+    if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: git config --global core.autocrlf input
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pipenv'
+      - name: Install pipenv
+        run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
+      - run: pipenv install
+      - name: Compile database
+        run: pipenv run python compile_db.py --output test/hs.db < test/patterns.json > test/patterns_final.json
+      - name: Generate test data
+        run: pipenv run python gen_test_data.py
+      - name: Preprocess training data
+        run: pipenv run python preprocess.py train --database test/hs.db --sherlock-path test/ --output-dir test/
+      - name: Train the model
+        run: pipenv run python train.py --sherlock-path test/ --input-dir test/ --output-dir test/
+      - name: Preprocess test data
+        run: pipenv run python preprocess.py test --database test/hs.db --sherlock-path test/ --output-dir test/
+      - name: Evaluate the model
+        run: pipenv run python test.py --sherlock-path test/ --input-dir test/ | grep "weighted avg       1.00"
