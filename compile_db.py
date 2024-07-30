@@ -30,7 +30,7 @@ db = hyperscan.Database()
 patterns = []
 ids = []
 flags = []
-for (i, regex) in enumerate(regexes):
+for i, regex in enumerate(regexes):
     print(json.dumps(regex))
     patterns.append(regex.encode("utf8"))
     ids.append(i)

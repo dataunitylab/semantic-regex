@@ -27,7 +27,9 @@ le.classes_ = np.load(os.path.join(args.input_dir, "classes.npy"), allow_pickle=
 # labels = le.transform(labels.values.ravel())
 num_examples = len(labels)
 
-model = model_from_json(open(os.path.join(args.input_dir, "nn_model_sherlock.json"), "r").read())
+model = model_from_json(
+    open(os.path.join(args.input_dir, "nn_model_sherlock.json"), "r").read()
+)
 model.load_weights(os.path.join(args.input_dir, "nn_model_weights_sherlock.h5"))
 
 sys.stderr.write("Evaluating...\n")

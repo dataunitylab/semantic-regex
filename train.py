@@ -86,7 +86,9 @@ model.compile(
     loss="categorical_crossentropy",
     metrics=["categorical_accuracy"],
 )
-open(os.path.join(args.output_dir, "nn_model_sherlock.json"), "w").write(model.to_json())
+open(os.path.join(args.output_dir, "nn_model_sherlock.json"), "w").write(
+    model.to_json()
+)
 
 preprocessed = open(os.path.join(args.input_dir, "preprocessed_train.txt"), "r")
 i = 0

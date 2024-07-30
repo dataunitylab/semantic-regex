@@ -39,6 +39,7 @@ with open(args.database, "rb") as f:
     # see https://github.com/darvid/python-hyperscan/issues/50
     db.scratch = hyperscan.Scratch(db)
 
+
 # Define a match callback for Hyperscan which updates the feature matrix
 def on_match(match_id, from_idx, to_idx, flags, context):
     (str_id, count, matrix) = context
@@ -46,7 +47,9 @@ def on_match(match_id, from_idx, to_idx, flags, context):
 
 
 # Load the values
-pq_values = ParquetFile(os.path.join(args.sherlock_path, f"{args.dataset}_values.parquet"))
+pq_values = ParquetFile(
+    os.path.join(args.sherlock_path, f"{args.dataset}_values.parquet")
+)
 
 # Remove the output if it exists
 if os.path.exists(output_file):

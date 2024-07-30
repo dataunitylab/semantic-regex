@@ -52,7 +52,7 @@ model.load_weights("nn_model_weights_sherlock.h5")
 
 # Produce a randomly sample of background from the training data
 background = []
-for (i, line) in enumerate(open("preprocessed_train.txt")):
+for i, line in enumerate(open("preprocessed_train.txt")):
     update_sample(background, i, line)
 
 matrix = np.loadtxt(io.StringIO("".join(background)))
