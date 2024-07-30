@@ -1,5 +1,7 @@
 # Learning from Uncurated Regular Expressions
 
+[![CI](https://github.com/dataunitylab/semantic-regex/actions/workflows/ci.yml/badge.svg)](https://github.com/dataunitylab/semantic-regex/actions/workflows/ci.yml)
+
 Dependencies of all Python code are managed with [Pipenv](https://pipenv.pypa.io/en/latest/) and can be installed with `pipenv install`.
 Note that the dataset from the [Sherlock](https://github.com/mitmedialab/sherlock-project) project should be available in a copy of the repository in alongside the directory for this project.
 [`jq`](https://jqlang.github.io/jq/) is also required for some JSON processing.
