@@ -1,5 +1,4 @@
 import argparse
-import ast
 import hyperscan
 import json
 import pickle
@@ -22,7 +21,7 @@ for line in sys.stdin:
             flags=(hyperscan.HS_FLAG_SINGLEMATCH | hyperscan.HS_FLAG_UTF8,),
         )
         regexes.add(line)
-    except hyperscan.error as e:
+    except hyperscan.error:
         pass
 
 # Build input for the final Hyperscan database

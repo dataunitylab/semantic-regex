@@ -1,6 +1,5 @@
 import argparse
 import io
-import json
 import random
 
 import matplotlib.pyplot as plt
@@ -42,9 +41,9 @@ class_idx = list(
 )
 
 # See https://github.com/slundberg/shap/issues/1406
-shap.explainers._deep.deep_tf.op_handlers[
-    "AddV2"
-] = shap.explainers._deep.deep_tf.passthrough
+shap.explainers._deep.deep_tf.op_handlers["AddV2"] = (
+    shap.explainers._deep.deep_tf.passthrough
+)
 
 # Load the trained model
 model = tf.keras.models.model_from_json(open("nn_model_sherlock.json").read())
@@ -66,7 +65,7 @@ sample = np.loadtxt(open("preprocessed_train.txt", "r"), max_rows=SAMPLE_SIZE)[
 # Use SHAP to create a summary plot
 e = shap.DeepExplainer(model, matrix)
 shap_values = e.shap_values(sample)
-feature_names = [l.strip() for l in open("pattern_ids.txt")]
+feature_names = [line.strip() for line in open("pattern_ids.txt")]
 shap.summary_plot(
     shap_values, sample, class_names=class_names, feature_names=feature_names
 )

@@ -1,8 +1,6 @@
 import argparse
 import ast
-import itertools
 import math
-import json
 import numpy as np
 import os
 import pickle
@@ -12,10 +10,6 @@ import sys
 from pyarrow.parquet import ParquetFile
 from tqdm import tqdm
 import hyperscan
-import joblib
-import numpy as np
-import scipy
-import scipy.sparse
 
 
 BATCH_SIZE = 1000

@@ -47,9 +47,9 @@ with tqdm(total=len(labels)) as pbar:
 
         y_pred = model.predict(matrix)
         y_pred = np.argmax(y_pred, axis=1)
-        labels_pred[
-            batch * BATCH_SIZE : batch * BATCH_SIZE + len(matrix)
-        ] = le.inverse_transform(y_pred)
+        labels_pred[batch * BATCH_SIZE : batch * BATCH_SIZE + len(matrix)] = (
+            le.inverse_transform(y_pred)
+        )
         batch += 1
         pbar.update(len(matrix))
 
