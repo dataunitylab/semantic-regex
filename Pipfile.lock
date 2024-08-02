@@ -447,10 +447,12 @@
         },
         "keras": {
             "hashes": [
-                "sha256:35c39534011e909645fb93515452e98e1a0ce23727b55d4918b9c58b2308c15e"
+                "sha256:5ce5f706f779fa7330e63632f327b75ce38144a120376b2ae1917c00fa6136af",
+                "sha256:5df12cc241a015a11b65ddb452c0eeb2744fce21d9b54ba48db87492568ccc68"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==2.12.0"
+            "version": "==2.13.1"
         },
         "kiwisolver": {
             "hashes": [
