@@ -51,31 +51,31 @@ regex_model_input = Input(shape=(regex_shape,))
 regex_model1 = BatchNormalization(axis=1)(regex_model_input)
 regex_model2 = Dense(
     1000,
-    activation=tf.nn.relu,
+    activation='relu',
     kernel_regularizer=tf.keras.regularizers.l2(0.0001),
 )(regex_model1)
 regex_model3 = Dropout(0.35)(regex_model2)
 regex_model4 = Dense(
     1000,
-    activation=tf.nn.relu,
+    activation='relu',
     kernel_regularizer=tf.keras.regularizers.l2(0.0001),
 )(regex_model3)
 
 merged_model2 = BatchNormalization(axis=1)(regex_model4)
 merged_model3 = Dense(
     500,
-    activation=tf.nn.relu,
+    activation='relu',
     kernel_regularizer=tf.keras.regularizers.l2(0.0001),
 )(merged_model2)
 merged_model4 = Dropout(0.35)(merged_model3)
 merged_model5 = Dense(
     500,
-    activation=tf.nn.relu,
+    activation='relu',
     kernel_regularizer=tf.keras.regularizers.l2(0.0001),
 )(merged_model4)
 merged_model_output = Dense(
     len(le.classes_),
-    activation=tf.nn.softmax,
+    activation='softmax',
     kernel_regularizer=tf.keras.regularizers.l2(0.0001),
 )(merged_model5)
 
@@ -85,9 +85,6 @@ model.compile(
     optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
     loss="categorical_crossentropy",
     metrics=["categorical_accuracy"],
-)
-open(os.path.join(args.output_dir, "nn_model_sherlock.json"), "w").write(
-    model.to_json()
 )
 
 preprocessed = open(os.path.join(args.input_dir, "preprocessed_train.txt"), "r")
@@ -115,4 +112,4 @@ with tqdm(total=len(labels)) as pbar:
         pbar.update(len(matrix))
 
 # Save the trained model weights
-model.save_weights(os.path.join(args.output_dir, "nn_model_sherlock.weights.h5"))
+model.save(os.path.join(args.output_dir, "nn_model_sherlock.keras"))

@@ -7,7 +7,7 @@ import pandas as pd
 from pyarrow.parquet import ParquetFile
 from sklearn.metrics import classification_report
 from sklearn.preprocessing import LabelEncoder
-from tensorflow.keras.models import model_from_json
+from tensorflow.keras.models import load_model
 from tqdm import tqdm
 
 BATCH_SIZE = 1000
@@ -27,10 +27,7 @@ le.classes_ = np.load(os.path.join(args.input_dir, "classes.npy"), allow_pickle=
 # labels = le.transform(labels.values.ravel())
 num_examples = len(labels)
 
-model = model_from_json(
-    open(os.path.join(args.input_dir, "nn_model_sherlock.json"), "r").read()
-)
-model.load_weights(os.path.join(args.input_dir, "nn_model_sherlock.weights.h5"))
+model = load_model(os.path.join(args.input_dir, "nn_model_sherlock.keras"))
 
 sys.stderr.write("Evaluating...\n")
 labels_pred = [""] * len(labels)

@@ -46,8 +46,7 @@ shap.explainers._deep.deep_tf.op_handlers["AddV2"] = (
 )
 
 # Load the trained model
-model = tf.keras.models.model_from_json(open("nn_model_sherlock.json").read())
-model.load_weights("nn_model_sherlock.weights.h5")
+model = tf.keras.models.load_model(os.path.join(args.input_dir, "nn_model_sherlock.keras"))
 
 # Produce a randomly sample of background from the training data
 background = []

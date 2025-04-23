@@ -9,6 +9,7 @@ patterns.json
 *.npy
 *.json
 *.h5
+*.keras
 *.png
 *.parquet
 regex101/
