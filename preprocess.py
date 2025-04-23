@@ -28,7 +28,7 @@ output_file = os.path.join(args.output_dir, f"preprocessed_{args.dataset}.txt")
 sys.stderr.write("Loading regexes from file…\n")
 with open(args.database, "rb") as f:
     [num_patterns, bdb] = pickle.load(f)
-    db = hyperscan.loadb(bdb)
+    db = hyperscan.loadb(bdb, mode=hyperscan.HS_MODE_BLOCK)
     # Scratch is not correctly initialized for deserialized databses
     # see https://github.com/darvid/python-hyperscan/issues/50
     db.scratch = hyperscan.Scratch(db)
