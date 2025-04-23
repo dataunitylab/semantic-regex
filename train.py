@@ -115,4 +115,4 @@ with tqdm(total=len(labels)) as pbar:
         pbar.update(len(matrix))
 
 # Save the trained model weights
-model.save_weights(os.path.join(args.output_dir, "nn_model_weights_sherlock.h5"))
+model.save_weights(os.path.join(args.output_dir, "nn_model_sherlock.weights.h5"))

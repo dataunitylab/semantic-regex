@@ -25,7 +25,7 @@ for line in sys.stdin:
         pass
 
 # Build input for the final Hyperscan database
-db = hyperscan.Database()
+db = hyperscan.Database(mode=hyperscan.HS_MODE_BLOCK)
 patterns = []
 ids = []
 flags = []

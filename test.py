@@ -30,7 +30,7 @@ num_examples = len(labels)
 model = model_from_json(
     open(os.path.join(args.input_dir, "nn_model_sherlock.json"), "r").read()
 )
-model.load_weights(os.path.join(args.input_dir, "nn_model_weights_sherlock.h5"))
+model.load_weights(os.path.join(args.input_dir, "nn_model_sherlock.weights.h5"))
 
 sys.stderr.write("Evaluating...\n")
 labels_pred = [""] * len(labels)

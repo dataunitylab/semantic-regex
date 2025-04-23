@@ -32,7 +32,7 @@ This will generate `preprocessed_train.txt` which contains all the feature vecto
 
 `pipenv run python train.py`
 
-The model architecture will be stored in `nn_model_sherlock.json` with the weights in `nn_model_weights_sherlock.h5`.
+The model architecture will be stored in `nn_model_sherlock.json` with the weights in `nn_model_sherlock.weights.h5`.
 
 ## Evaluation
 
