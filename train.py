@@ -51,31 +51,31 @@ regex_model_input = Input(shape=(regex_shape,))
 regex_model1 = BatchNormalization(axis=1)(regex_model_input)
 regex_model2 = Dense(
     1000,
-    activation='relu',
+    activation="relu",
     kernel_regularizer=tf.keras.regularizers.l2(0.0001),
 )(regex_model1)
 regex_model3 = Dropout(0.35)(regex_model2)
 regex_model4 = Dense(
     1000,
-    activation='relu',
+    activation="relu",
     kernel_regularizer=tf.keras.regularizers.l2(0.0001),
 )(regex_model3)
 
 merged_model2 = BatchNormalization(axis=1)(regex_model4)
 merged_model3 = Dense(
     500,
-    activation='relu',
+    activation="relu",
     kernel_regularizer=tf.keras.regularizers.l2(0.0001),
 )(merged_model2)
 merged_model4 = Dropout(0.35)(merged_model3)
 merged_model5 = Dense(
     500,
-    activation='relu',
+    activation="relu",
     kernel_regularizer=tf.keras.regularizers.l2(0.0001),
 )(merged_model4)
 merged_model_output = Dense(
     len(le.classes_),
-    activation='softmax',
+    activation="softmax",
     kernel_regularizer=tf.keras.regularizers.l2(0.0001),
 )(merged_model5)
 
