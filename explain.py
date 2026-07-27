@@ -5,9 +5,9 @@ import random
 
 import matplotlib.pyplot as plt
 import numpy as np
-from pyarrow.parquet import ParquetFile
 import shap
 import tensorflow as tf
+from pyarrow.parquet import ParquetFile
 
 BACKGROUND_SIZE = 1000
 SAMPLE_SIZE = 500

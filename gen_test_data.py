@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 data = ["['a', 'b', 'c']", "['1', '2', '3']"]
 df = pd.DataFrame(data, columns=["values"])
 df.to_parquet("test/test_values.parquet", index=True)

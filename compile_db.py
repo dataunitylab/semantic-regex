@@ -1,9 +1,9 @@
 import argparse
-import hyperscan
 import json
 import pickle
 import sys
 
+import hyperscan
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-o", "--output", default="hs.db")
