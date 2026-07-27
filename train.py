@@ -4,18 +4,17 @@ import sys
 
 import numpy as np
 import pandas as pd
+import tensorflow as tf
 from pyarrow.parquet import ParquetFile
 from sklearn.preprocessing import LabelEncoder
-import tensorflow as tf
 from tensorflow.keras.layers import (
-    Input,
+    BatchNormalization,
     Dense,
     Dropout,
-    BatchNormalization,
+    Input,
 )
 from tensorflow.keras.models import Model
 from tqdm import tqdm
-
 
 BATCH_SIZE = 1000
 

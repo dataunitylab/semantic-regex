@@ -1,16 +1,15 @@
 import argparse
 import ast
 import math
-import numpy as np
 import os
 import pickle
 import string
 import sys
 
+import hyperscan
+import numpy as np
 from pyarrow.parquet import ParquetFile
 from tqdm import tqdm
-import hyperscan
-
 
 BATCH_SIZE = 1000
 MAX_VALS = 1000
