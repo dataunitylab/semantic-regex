@@ -1407,11 +1407,12 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:9828422e7541213b0aacb6e10bbf9dd8febeaa45a48570e09b6d100e063fc9f9",
-                "sha256:b9ab3a104bedb292323f53797b00864e10e434a3ab3906813a7169e4745b912a"
+                "sha256:025bccbbf0fa05b6192bc64ae1e7b16e001fd6d6d4d5de03c97b1c1ade523bef",
+                "sha256:29b23c360f22f414dc7336bb39178cc7bcbf6021ed2733cde173f09dba19abb3"
             ],
-            "markers": "python_version >= '3.9'",
-            "version": "==79.0.0"
+            "index": "pypi",
+            "markers": "python_version >= '3.10'",
+            "version": "==83.0.0"
         },
         "shap": {
             "hashes": [
